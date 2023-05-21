@@ -1,0 +1,11 @@
+.slider {
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.slider .slide {
+    min-width: 100%;
+    height: 100%;
+    transition: transform 300ms ease;
+}
