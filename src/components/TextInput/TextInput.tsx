@@ -6,6 +6,9 @@ interface Props {
 
 export function TextInput({ label }: Props) {
     return (
-        <TextField label={label} variant="outlined" />
+        <TextField
+            fullWidth
+            label={label}
+            variant="outlined" />
     );
 }

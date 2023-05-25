@@ -1,10 +1,10 @@
-import { TextInput } from "../../../components/TextInput/TextInput";
+import { PasswordInput } from "../../../components/PasswordInput/PasswordInput";
 
 export function PasswordInputs() {
     return (
         <>
-            <TextInput label='Password' />
-            <TextInput label='Confirm password' />
+            <PasswordInput label='Password' />
+            <PasswordInput label='Confirm password' />
         </>
     );
 }
