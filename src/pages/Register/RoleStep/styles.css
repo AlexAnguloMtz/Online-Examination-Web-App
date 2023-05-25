@@ -1,0 +1,34 @@
+.role__select {
+    display: flex;
+    flex-direction: column;
+}
+
+.role__option {
+    background-color: inherit;
+    transition: background-color 300ms ease;
+    cursor: pointer;
+    border-radius: 1em;
+    border: solid transparent 2px;
+}
+
+.role__option:hover {
+    background-color: rgb(120, 190, 223);
+}
+
+.role__option.active {
+    background-color: rgb(54, 133, 170);
+}
+
+.role__image {
+    max-width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+    .role__select {
+        flex-direction: row;
+    }
+
+    .role__option {
+        flex: 1;
+    }
+}

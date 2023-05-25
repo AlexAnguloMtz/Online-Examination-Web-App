@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { CountrySelection } from './CountrySelection/CountrySelection';
-import { RoleSelection } from './RoleSelection/RoleSelection';
 import './styles.css';
+import { useState } from 'react';
 import { Slider } from '../../components/Slider/Slider';
+import { RoleStep } from './RoleStep/RoleStep';
+import { CountryStep } from './CountryStep/CountryStep';
 
 export function Register() {
 
@@ -19,8 +19,8 @@ export function Register() {
     return (
         <section className="register">
             <Slider step={step} slidePadding='1em'>
-                <RoleSelection onContinue={moveForward} />
-                <CountrySelection onContinue={moveForward} onGoBack={moveBackwards} />
+                <RoleStep onContinue={moveForward} />
+                <CountryStep onContinue={moveForward} onGoBack={moveBackwards} />
             </Slider>
         </section>
     );

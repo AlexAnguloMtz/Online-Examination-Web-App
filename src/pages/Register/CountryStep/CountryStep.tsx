@@ -7,7 +7,7 @@ interface Props {
     onGoBack: () => void
 }
 
-export function CountrySelection({ onContinue, onGoBack }: Props) {
+export function CountryStep({ onContinue, onGoBack }: Props) {
     return (
         <RegisterStep>
             <RegistrationFormButton onClick={onContinue}>
