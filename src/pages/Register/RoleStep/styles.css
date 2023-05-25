@@ -1,5 +1,6 @@
 .register__role {
-    gap: 1.5em;
+    max-width: 600px;
+    gap: 2em;
 }
 
 .role__select {

@@ -2,6 +2,7 @@ import './styles.css';
 import { useState } from 'react';
 import { Slider } from '../../components/Slider/Slider';
 import { RoleStep } from './RoleStep/RoleStep';
+import { AccountStep } from './AccountStep/AccountStep';
 
 export function Register() {
 
@@ -21,7 +22,9 @@ export function Register() {
                 step={step}
                 slidePadding='1em 1em 3em 1em'>
                 <RoleStep onContinue={moveForward} />
-                <></>
+                <AccountStep
+                    onPrimaryAction={() => { }}
+                    onGoBack={moveBackwards} />
             </Slider>
         </section>
     );

@@ -1,0 +1,6 @@
+.register__account {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: min(100%, 450px);
+}
