@@ -1,12 +1,19 @@
-export function Slide({ translateX, children }: Props) {
+export function Slide({ translateX, padding = '0', children }: Props) {
     return (
-        <div className="slide" style={{ transform: `translateX(${translateX}%)` }}>
+        <div
+            className="slider__slide"
+            style={
+                {
+                    transform: `translateX(${translateX}%)`,
+                    padding
+                }}>
             {children}
         </div>
     );
 }
 
 interface Props {
-    translateX: number
+    translateX: number,
+    padding?: string,
     children: JSX.Element | Array<JSX.Element>
 }

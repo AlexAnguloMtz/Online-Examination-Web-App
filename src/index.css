@@ -7,3 +7,13 @@
 * {
   font-family: Helvetica, sans-serif;
 }
+
+* {
+  --primary-color-hue: 217;
+  --primary-color-saturation: 100%;
+  --primary-color-lightness: 50%;
+  --primary-color:
+    hsl(var(--primary-color-hue),
+      var(--primary-color-saturation),
+      var(--primary-color-lightness));
+}

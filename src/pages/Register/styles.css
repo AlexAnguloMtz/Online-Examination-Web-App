@@ -1,0 +1,20 @@
+.register {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(205, 247, 247);
+}
+
+.register__step {
+    text-align: center;
+    background-color: white;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.register__button {
+    font-size: 1.1em;
+    padding: 0.6em 0;
+}
