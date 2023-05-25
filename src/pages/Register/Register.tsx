@@ -18,7 +18,7 @@ export function Register() {
 
     return (
         <section className="register">
-            <Slider step={step} slidePadding='1em'>
+            <Slider step={step} slidePadding='1em 1em 3em 1em'>
                 <RoleStep onContinue={moveForward} />
                 <CountryStep onContinue={moveForward} onGoBack={moveBackwards} />
             </Slider>

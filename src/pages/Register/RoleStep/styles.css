@@ -1,11 +1,21 @@
+.register__role {
+    gap: 1.5em;
+}
+
 .role__select {
     display: flex;
     flex-direction: column;
+    gap: 1em;
 }
 
 .role__option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 1em 2em;
     background-color: inherit;
-    transition: background-color 300ms ease;
+    transition: all 300ms ease;
     cursor: pointer;
     border-radius: 1em;
     border: solid transparent 2px;
@@ -16,10 +26,15 @@
 }
 
 .role__option.active {
+    color: white;
     background-color: rgb(54, 133, 170);
 }
 
-.role__image {
+.role__option-name {
+    font-size: 1.5em;
+}
+
+.role__option-image {
     max-width: 100%;
 }
 

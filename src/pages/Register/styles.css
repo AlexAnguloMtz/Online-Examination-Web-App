@@ -1,5 +1,5 @@
 .register {
-    height: 100vh;
+    min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,10 +9,12 @@
 .register__step {
     text-align: center;
     background-color: white;
-    padding: 1em;
+    padding: 2em 1em;
     border-radius: 1em;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     max-width: 600px;
+    display: flex;
+    flex-direction: column;
 }
 
 .register__button {

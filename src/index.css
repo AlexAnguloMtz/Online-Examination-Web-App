@@ -17,3 +17,9 @@
       var(--primary-color-saturation),
       var(--primary-color-lightness));
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}

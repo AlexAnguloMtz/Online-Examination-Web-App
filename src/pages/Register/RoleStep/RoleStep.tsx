@@ -8,7 +8,7 @@ interface Props {
 
 export function RoleStep({ onContinue }: Props) {
     return (
-        <RegisterStep>
+        <RegisterStep className="register__role">
             <h1>Are you a teacher or a student?</h1>
             <RoleSelect />
             <RegistrationFormButton onClick={onContinue}>

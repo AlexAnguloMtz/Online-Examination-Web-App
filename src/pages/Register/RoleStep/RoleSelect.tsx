@@ -11,15 +11,18 @@ export function RoleSelect() {
     return (
         <div className="role__select">
             <RoleOption
+                text={'Teacher'}
                 isActive={role === Role.TEACHER}
                 onClick={() => setRole(Role.TEACHER)}
                 src={teacher}
                 alt='teacher' />
             <RoleOption
+                text={'Student'}
                 isActive={role === Role.STUDENT}
                 onClick={() => setRole(Role.STUDENT)}
                 src={student}
-                alt='student' />
+                alt='student'
+            />
         </div>
     );
 }
