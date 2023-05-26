@@ -1,12 +1,15 @@
 .register__role {
     max-width: 600px;
     gap: 2em;
+    display: flex;
+    flex-direction: column;
 }
 
 .role__select {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    align-items: center;
 }
 
 .role__option {
@@ -20,6 +23,7 @@
     cursor: pointer;
     border-radius: 1em;
     border: solid transparent 2px;
+    width: 80%;
 }
 
 .role__option:hover {

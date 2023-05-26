@@ -5,14 +5,26 @@
 
 .password-input button {
     position: absolute;
-    right: 20px;
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;
     cursor: pointer;
+    transition: background-color 300ms ease;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
 }
 
-.password-input img {
-    width: 30px;
+.password-input__icon {
+    width: 25px;
+    transition: fill 250ms ease;
+    fill: rgb(115, 118, 119);
+}
+
+.password-input__icon:hover {
+    fill: var(--primary-color);
 }

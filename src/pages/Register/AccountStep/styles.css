@@ -1,6 +1,41 @@
 .register__account {
+    width: 100%;
+    max-width: 1000px;
+    font-size: 0.8em;
+}
+
+.register__account-inputs {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    width: min(100%, 450px);
+}
+
+.register__image {
+    display: none;
+    width: 50%;
+    object-fit: cover;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+.register__account-primary-action {
+    margin-top: 1em;
+}
+
+@media screen and (min-width: 500px) {
+    .register__account {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .register__image {
+        display: block;
+    }
+
+    .register__account-inputs {
+        width: 50%;
+        padding: 3em;
+    }
+
 }

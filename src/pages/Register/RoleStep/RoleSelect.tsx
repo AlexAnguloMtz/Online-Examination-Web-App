@@ -1,5 +1,5 @@
-import teacher from '../../../assets/image/teacher.svg';
-import student from '../../../assets/image/student.svg';
+import teacher from '../../../assets/image/teacher.png';
+import student from '../../../assets/image/student.png';
 import { RoleOption } from './RoleOption';
 import { Role } from '../../../models/Role';
 import { useState } from 'react';

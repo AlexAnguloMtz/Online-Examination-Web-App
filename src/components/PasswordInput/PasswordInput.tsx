@@ -1,21 +1,34 @@
 import './styles.css';
 import { TextInput } from "../TextInput/TextInput";
-import eye from '../../assets/icons/eye-solid.svg';
-import eyeSlash from '../../assets/icons/eye-slash-solid.svg';
+import { InputType } from '../TextInput/InputType';
+import { Eye } from './Eye';
+import { EyeSlash } from './EyeSlash';
 
 interface Props {
-    label: string
+    label: string,
+    isHiding: boolean,
+    onIconClick: () => void
 }
 
-export function PasswordInput({ label }: Props) {
+export function PasswordInput({ label, isHiding, onIconClick }: Props) {
+
     return (
         <div className="password-input">
-            <TextInput label={label} />
-            <button>
-                <img
-                    src={eye}
-                    alt="show" />
+            <TextInput
+                label={label}
+                type={isHiding ? InputType.PASSWORD : InputType.TEXT} />
+            <button
+                className='password-input__button'
+                onClick={onIconClick}>
+                {iconFor(isHiding)}
             </button>
         </div>
     );
+}
+
+function iconFor(isHiding: boolean) {
+    const className: string = 'password-input__icon';
+    return (isHiding)
+        ? <Eye className={className} />
+        : <EyeSlash className={className} />
 }

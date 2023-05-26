@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(205, 247, 247);
+    background-color: rgb(181, 224, 235);
 }
 
 .register__step {
@@ -11,12 +11,10 @@
     background-color: white;
     padding: 2em 1em;
     border-radius: 1em;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .register__button {
     font-size: 1.1em;
-    padding: 0.6em 0;
+    padding: 0.8em 0;
 }
