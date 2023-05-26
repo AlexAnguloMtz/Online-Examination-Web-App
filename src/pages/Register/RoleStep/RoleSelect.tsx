@@ -1,7 +1,7 @@
 import teacher from '../../../assets/image/teacher.png';
 import student from '../../../assets/image/student.png';
 import { RoleOption } from './RoleOption';
-import { Role } from '../../../models/Role';
+import { Role } from '../../../models/auth/Role';
 import { useState } from 'react';
 
 export function RoleSelect() {
