@@ -13,10 +13,10 @@ describe('PersonalName tests', () => {
     })
 
     it('Personal name cannot contain more than 50 characters', () => {
-        const correctLength: Either<Nothing, PersonalName> = PersonalName.create('A'.repeat(50));
         const tooLong: Either<Nothing, PersonalName> = PersonalName.create('A'.repeat(51));
+        const correctLength: Either<Nothing, PersonalName> = PersonalName.create('A'.repeat(50));
 
-        expect(isRight(correctLength)).toBe(true)
         expect(isLeft(tooLong)).toBe(true);
+        expect(isRight(correctLength)).toBe(true)
     })
 })
