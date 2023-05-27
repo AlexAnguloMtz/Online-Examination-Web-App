@@ -8,6 +8,10 @@ export function Register() {
 
     const [step, setStep] = useState<number>(0);
 
+    function handleRegistration() {
+
+    }
+
     function moveForward() {
         setStep(step + 1);
     }
@@ -23,7 +27,7 @@ export function Register() {
                 slidePadding='1em 1em 3em 1em'>
                 <RoleStep onContinue={moveForward} />
                 <AccountStep
-                    onPrimaryAction={() => { }}
+                    onPrimaryAction={handleRegistration}
                     onGoBack={moveBackwards} />
             </Slider>
         </section>

@@ -1,38 +1,36 @@
-import { describe, it, expect, vi, Mock, afterEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
-import { Email, EmailValidationError, EmailValidator } from './Email';
-import { anyString } from '../../util/testing-helpers';
+import { Email, EmailValidationError } from './Email';
+
+function assertEmailIsNotCreated(email: string): void {
+    const either: Either<EmailValidationError, Email> = Email.create(email);
+
+    expect(isLeft(either)).toBe(true);
+}
 
 describe('Email tests', () => {
 
-    afterEach(() => {
-        vi.restoreAllMocks()
+    it('cannot be empty', () => {
+        assertEmailIsNotCreated('');
     })
 
-    it('calls the injected validator when creating an Email', () => {
-        const validator: Mock<any, any> = vi.fn();
-        validator.mockImplementation((email: string) => true);
-
-        Email.create('john_doe@gmail.com', validator);
-
-        expect(validator).toBeCalledTimes(1);
-        expect(validator).toBeCalledWith('john_doe@gmail.com');
+    it('must contain a username', () => {
+        assertEmailIsNotCreated('@gmail.com');
     })
 
-    it('creates an Email when validation is successful', () => {
-        const validator: EmailValidator = (email: string) => true;
+    it('must contain the @ symbol', () => {
+        assertEmailIsNotCreated('john_doegmail.com');
+    })
 
-        const either: Either<EmailValidationError, Email> = Email.create(anyString(), validator);
+    it('must contain a valid domain', () => {
+        assertEmailIsNotCreated('john_doe@');
+        assertEmailIsNotCreated('john_doe@gmailcom');
+    })
+
+    it('can create Email instance with a valid email string', () => {
+        const either: Either<EmailValidationError, Email> = Email.create('john_doe@gmail.com');
 
         expect(isRight(either)).toBe(true);
-    })
-
-    it('returns a validation error when validation fails', () => {
-        const validator: EmailValidator = (email: string) => false;
-
-        const either: Either<EmailValidationError, Email> = Email.create(anyString(), validator);
-
-        expect(isLeft(either)).toBe(true);
     })
 
 })
