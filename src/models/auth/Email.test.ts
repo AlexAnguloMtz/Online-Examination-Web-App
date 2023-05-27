@@ -10,7 +10,7 @@ describe('Email tests', () => {
         vi.restoreAllMocks()
     })
 
-    it('calls the injected validator when creating and Email', () => {
+    it('calls the injected validator when creating an Email', () => {
         const validator: Mock<any, any> = vi.fn();
         validator.mockImplementation((email: string) => true);
 
