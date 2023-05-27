@@ -21,8 +21,7 @@ describe('Email tests', () => {
     })
 
     it('creates an Email when validation is successful', () => {
-        const validator: Mock<any, any> = vi.fn();
-        validator.mockImplementation((email: string) => true);
+        const validator: EmailValidator = (email: string) => true;
 
         const either: Either<EmailValidationError, Email> = Email.create(anyString(), validator);
 
@@ -30,8 +29,7 @@ describe('Email tests', () => {
     })
 
     it('returns a validation error when validation fails', () => {
-        const validator: Mock<any, any> = vi.fn();
-        validator.mockImplementation((email: string) => false);
+        const validator: EmailValidator = (email: string) => false;
 
         const either: Either<EmailValidationError, Email> = Email.create(anyString(), validator);
 
