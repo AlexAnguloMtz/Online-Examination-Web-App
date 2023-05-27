@@ -1,5 +1,5 @@
 import { Either, left, right } from "fp-ts/lib/Either";
-import { ValidationError } from "../common/ValidationError";
+import { ValidationError } from "../common/types/ValidationError";
 
 export type PersonalNameValidationError = ValidationError;
 

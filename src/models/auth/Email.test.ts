@@ -1,8 +1,7 @@
 import { describe, it, expect, vi, Mock, afterEach } from 'vitest';
 import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
 import { Email, EmailValidationError, EmailValidator } from './Email';
-
-const anyString = () => '';
+import { anyString } from '../../util/testing-helpers';
 
 describe('Email tests', () => {
 

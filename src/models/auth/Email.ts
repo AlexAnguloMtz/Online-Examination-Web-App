@@ -1,8 +1,8 @@
 import { Either, right, left } from 'fp-ts/Either';
-import { Nothing } from '../common/Nothing';
-import { ValidationError } from '../common/ValidationError';
+import { ValidationError } from '../common/types/ValidationError';
+import { StringValidator } from '../common/types/StringValidator';
 
-export type EmailValidator = (email: string) => boolean;
+export type EmailValidator = StringValidator;
 
 export type EmailValidationError = ValidationError;
 
