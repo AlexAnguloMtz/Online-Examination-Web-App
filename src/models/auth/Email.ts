@@ -1,5 +1,10 @@
 import { Either, right, left } from 'fp-ts/Either';
 import { Nothing } from '../common/Nothing';
+import { ValidationError } from '../common/ValidationError';
+
+export type EmailValidator = (email: string) => boolean;
+
+export type EmailValidationError = ValidationError;
 
 export class Email {
 
@@ -9,14 +14,10 @@ export class Email {
         this._email = email;
     }
 
-    static create(email: string): Either<Nothing, Email> {
-        return Email._isValid(email)
+    static create(email: string, validator: EmailValidator): Either<EmailValidationError, Email> {
+        return validator(email)
             ? right(new Email(email))
-            : left(null as Nothing);
-    }
-
-    private static _isValid(email: string) {
-        return email.length > 0;
+            : left('Email must have a valid structure' as EmailValidationError);
     }
 
     get value(): string {

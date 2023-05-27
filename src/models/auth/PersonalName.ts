@@ -1,5 +1,7 @@
 import { Either, left, right } from "fp-ts/lib/Either";
-import { Nothing } from "../common/Nothing";
+import { ValidationError } from "../common/ValidationError";
+
+export type PersonalNameValidationError = ValidationError;
 
 export class PersonalName {
 
@@ -9,10 +11,10 @@ export class PersonalName {
         this._value = value;
     }
 
-    static create(value: string): Either<Nothing, PersonalName> {
+    static create(value: string): Either<PersonalNameValidationError, PersonalName> {
         return PersonalName._isValid(value)
             ? right(new PersonalName(value))
-            : left(null as Nothing);
+            : left('Invalid personal name' as PersonalNameValidationError);
     }
 
     private static _isValid(value: string): boolean {
