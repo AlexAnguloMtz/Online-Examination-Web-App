@@ -17,7 +17,7 @@ describe('Email tests', () => {
         Email.create('john_doe@gmail.com', validator);
 
         expect(validator).toBeCalledTimes(1);
-        expect(validator.mock.calls[0][0]).toBe('john_doe@gmail.com');
+        expect(validator).toBeCalledWith('john_doe@gmail.com');
     })
 
     it('creates an Email when validation is successful', () => {
