@@ -43,13 +43,13 @@ describe('given we obtain user input for registration', () => {
     it('when all data is valid, we can make an object with all the validated data', () => {
         const data: RawRegistrationData = validRegistrationData();
 
-        const validData: ValidRegistrationData = ValidRegistrationData.make(data);
+        const validatedData: ValidRegistrationData = ValidRegistrationData.make(data);
 
-        expect(data.firstName).toBe(validData.firstName);
-        expect(data.lastName).toBe(validData.lastName);
-        expect(data.email).toBe(validData.email);
-        expect(data.password).toBe(validData.password);
-        expect(data.role).toBe(validData.role);
+        expect(data.firstName).toBe(validatedData.firstName);
+        expect(data.lastName).toBe(validatedData.lastName);
+        expect(data.email).toBe(validatedData.email);
+        expect(data.password).toBe(validatedData.password);
+        expect(data.role).toBe(validatedData.role);
     })
 
 })
@@ -69,6 +69,6 @@ function expectError(data: RawRegistrationData, error: Error) {
     const errors: List<Error> = ValidRegistrationData.validate(data);
 
     expect(errors).toHaveLength(1);
-    expect(typeof errors[0]).toBe(typeof error);
+    expect(errors[0].constructor.name).toBe(error.constructor.name);
     expect(() => ValidRegistrationData.make(data)).toThrowError(error);
 }
