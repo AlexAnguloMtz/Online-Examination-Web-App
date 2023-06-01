@@ -1,8 +1,4 @@
-import { Either, right, left } from "fp-ts/lib/Either";
-import { ValidationError } from "../common/types/ValidationError";
 import passwordValidator from 'password-validator';
-
-export type PasswordValidationError = ValidationError;
 
 const validator = new passwordValidator();
 
@@ -15,26 +11,29 @@ validator
     .has().symbols(1)
     .has().not().spaces();
 
+export class PasswordError extends Error { };
+
 export class Password {
 
-    private _password: string;
+    private _value: string;
 
     private constructor(password: string) {
-        this._password = password;
+        this._value = password;
     }
 
-    static create(password: string): Either<PasswordValidationError, Password> {
-        return Password._isValid(password)
-            ? right(new Password(password))
-            : left('Invalid password' as PasswordValidationError);
+    public static create(password: string): Password {
+        if (!Password.isValid(password)) {
+            throw new PasswordError('Invalid password');
+        }
+        return new Password(password);
     }
 
-    static _isValid(password: string): boolean {
+    public static isValid(password: string): boolean {
         return validator.validate(password) as boolean;
     }
 
-    get value(): string {
-        return this._password;
+    public get value(): string {
+        return this._value;
     }
 
 }

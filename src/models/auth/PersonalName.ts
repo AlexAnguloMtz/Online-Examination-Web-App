@@ -1,7 +1,4 @@
-import { Either, left, right } from "fp-ts/lib/Either";
-import { ValidationError } from "../common/types/ValidationError";
-
-export type PersonalNameValidationError = ValidationError;
+export class PersonalNameError extends Error { };
 
 export class PersonalName {
 
@@ -11,17 +8,18 @@ export class PersonalName {
         this._value = value;
     }
 
-    static create(value: string): Either<PersonalNameValidationError, PersonalName> {
-        return PersonalName._isValid(value)
-            ? right(new PersonalName(value))
-            : left('Invalid personal name' as PersonalNameValidationError);
+    static create(name: string): PersonalName {
+        if (!PersonalName.isValid(name)) {
+            throw new PersonalNameError('Invalid name');
+        }
+        return new PersonalName(name);
     }
 
-    private static _isValid(value: string): boolean {
+    public static isValid(value: string): boolean {
         return value.length > 0 && value.length <= 50;
     }
 
-    get value(): string {
+    public get value(): string {
         return this._value;
     }
 

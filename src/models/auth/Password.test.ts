@@ -1,17 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
-import { Password, PasswordValidationError } from './Password';
-
-function assertPasswordIsNotCreated(value: string): void {
-    const either: Either<PasswordValidationError, Password> = Password.create(value);
-
-    expect(isLeft(either)).toBe(true);
-}
-
-function assertHasInvalidLength(value: string, expectedLength: number) {
-    expect(value.length).toBe(expectedLength);
-    assertPasswordIsNotCreated(value);
-}
+import { Password, PasswordError } from './Password';
 
 describe('Password tests', () => {
 
@@ -45,9 +33,19 @@ describe('Password tests', () => {
     })
 
     it('can create a Password with a valid password string', () => {
-        const either: Either<PasswordValidationError, Password> = Password.create('Secret_9');
+        const password: Password = Password.create('Secret_9');
 
-        expect(isRight(either)).toBe(true);
+        expect(password.value).toBe('Secret_9');
     })
 
 })
+
+function assertPasswordIsNotCreated(password: string): void {
+    expect(Password.isValid(password)).toBe(false);
+    expect(() => Password.create(password)).toThrowError(PasswordError);
+}
+
+function assertHasInvalidLength(value: string, expectedLength: number): void {
+    expect(value.length).toBe(expectedLength);
+    assertPasswordIsNotCreated(value);
+}

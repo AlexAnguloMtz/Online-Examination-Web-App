@@ -1,36 +1,33 @@
 import { describe, it, expect } from 'vitest';
-import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
-import { Email, EmailValidationError } from './Email';
-
-function assertEmailIsNotCreated(email: string): void {
-    const either: Either<EmailValidationError, Email> = Email.create(email);
-
-    expect(isLeft(either)).toBe(true);
-}
+import { Email, EmailError } from './Email';
 
 describe('Email tests', () => {
 
     it('cannot be empty', () => {
-        assertEmailIsNotCreated('');
+        assertEmailIsInvalid('');
     })
 
     it('must contain a username', () => {
-        assertEmailIsNotCreated('@gmail.com');
+        assertEmailIsInvalid('@gmail.com');
     })
 
     it('must contain the @ symbol', () => {
-        assertEmailIsNotCreated('john_doegmail.com');
+        assertEmailIsInvalid('john_doegmail.com');
     })
 
     it('must contain a valid domain', () => {
-        assertEmailIsNotCreated('john_doe@');
-        assertEmailIsNotCreated('john_doe@gmailcom');
+        assertEmailIsInvalid('john_doe@gmailcom');
     })
 
-    it('can create Email instance with a valid email string', () => {
-        const either: Either<EmailValidationError, Email> = Email.create('john_doe@gmail.com');
+    it('can create an Email instance with a valid email string', () => {
+        const email: Email = Email.create('john_doe@gmail.com');
 
-        expect(isRight(either)).toBe(true);
+        expect(email.value).toBe('john_doe@gmail.com');
     })
 
 })
+
+function assertEmailIsInvalid(email: string): void {
+    expect(Email.isValid(email)).toBe(false);
+    expect(() => Email.create(email)).toThrowError(EmailError);
+}

@@ -1,8 +1,6 @@
-import { Either, right, left } from 'fp-ts/Either';
-import { ValidationError } from '../common/types/ValidationError';
 import { validate } from 'email-validator';
 
-export type EmailValidationError = ValidationError;
+export class EmailError extends Error { }
 
 export class Email {
 
@@ -12,17 +10,18 @@ export class Email {
         this._email = email;
     }
 
-    static create(email: string): Either<EmailValidationError, Email> {
-        return Email._isValid(email)
-            ? right(new Email(email))
-            : left('Email must have a valid structure' as EmailValidationError);
+    public static create(email: string): Email {
+        if (!Email.isValid(email)) {
+            throw new EmailError('Invalid email');
+        }
+        return new Email(email);
     }
 
-    static _isValid(email: string): boolean {
+    public static isValid(email: string): boolean {
         return validate(email);
     }
 
-    get value(): string {
+    public get value(): string {
         return this._email;
     }
 
