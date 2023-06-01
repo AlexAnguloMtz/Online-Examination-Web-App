@@ -1,79 +1,60 @@
-import { describe, it, expect } from 'vitest';
-import { Either, isLeft, isRight, mapLeft } from 'fp-ts/lib/Either';
-import { NonEmptyArray } from 'fp-ts/lib/NonEmptyArray';
-import { RegistrationRequest } from './RegistrationRequest';
+import { describe, expect, it } from 'vitest';
 import { Role } from './Role';
-import { expectEither, fail } from '../../utils/testing-helpers';
-import { FirstNameError, LastNameError, RegistrationData } from './RegistrationData';
-import { ValidRegistrationData, validateRegistrationData } from './ValidRegistrationData';
-import { Errors } from '../common/Errors';
+import { FirstNameError, LastNameError, ValidRegistrationData } from './ValidRegistrationData';
+import { List } from '../../common/List';
+import { RawRegistrationData } from './RegistrationData';
 import { EmailError } from './Email';
 import { PasswordError } from './Password';
 
-describe('RegistrationRequest tests', () => {
+describe('given we obtain user input for registration', () => {
 
-    it('when first name is invalid, we get a first name error', () => {
-        const data: RegistrationData = withInvalidFirstName();
+    it('when first name is invalid, then we get a first name error', () => {
+        const data: RawRegistrationData = { ...validRegistrationData(), firstName: '' };
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
-
-        expectError(either, FirstNameError);
+        expectError(data, new FirstNameError());
     })
 
-    it('when last name is invalid, we get a last name error', () => {
-        const data: RegistrationData = withInvalidLastName();
+    it('when last name is invalid, then we get a last name error', () => {
+        const data: RawRegistrationData = { ...validRegistrationData(), lastName: '' };
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
-
-        expectError(either, LastNameError);
+        expectError(data, new LastNameError());
     })
 
-    it('when email is invalid, we get an email error', () => {
-        const data: RegistrationData = withInvalidEmail();
+    it('when email is invalid,then we get an email error', () => {
+        const data: RawRegistrationData = { ...validRegistrationData(), email: '' };
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
-
-        expectError(either, EmailError);
+        expectError(data, new EmailError());
     })
 
-    it('when email is invalid, we get an email error', () => {
-        const data: RegistrationData = withInvalidEmail();
+    it('when password is invalid, then we get a password error', () => {
+        const data: RawRegistrationData = { ...validRegistrationData(), password: '' };
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
-
-        expectError(either, EmailError);
+        expectError(data, new PasswordError());
     })
 
-    it('when password is invalid, we get a password error', () => {
-        const data: RegistrationData = withInvalidPassword();
+    it('when all data is valid, then we do not get any errors', () => {
+        const data: RawRegistrationData = validRegistrationData();
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
+        const errors: List<Error> = ValidRegistrationData.validate(data);
 
-        expectError(either, PasswordError);
+        expect(errors).toHaveLength(0);
     })
 
-    it('when all data is valid, we get a valid object', () => {
-        const data: RegistrationData = withInvalidPassword();
+    it('when all data is valid, we can make an object with all the validated data', () => {
+        const data: RawRegistrationData = validRegistrationData();
 
-        const either: Either<Errors, ValidRegistrationData> = validateRegistrationData(data);
+        const validData: ValidRegistrationData = ValidRegistrationData.make(data);
 
-        expect(isRight(either)).toBe(true);
+        expect(data.firstName).toBe(validData.firstName);
+        expect(data.lastName).toBe(validData.lastName);
+        expect(data.email).toBe(validData.email);
+        expect(data.password).toBe(validData.password);
+        expect(data.role).toBe(validData.role);
     })
 
 })
 
-function expectError<T>(either: Either<Errors, ValidRegistrationData>, errorClazz: T) {
-
-    expect(isLeft(either)).toBe(true);
-
-    mapLeft((errors: Errors) => {
-        expect(errors).toHaveLength(1);
-        expect(errors[0]).toBeInstanceOf(errorClazz);
-    });
-
-}
-
-function validRawData(): RegistrationData {
+function validRegistrationData() {
     return {
         firstName: 'john',
         lastName: 'doe',
@@ -83,31 +64,11 @@ function validRawData(): RegistrationData {
     };
 }
 
-function withInvalidFirstName(): RegistrationData {
-    return {
-        ...validRawData(),
-        firstName: ''
-    };
-}
 
-function withInvalidLastName(): RegistrationData {
-    return {
-        ...validRawData(),
-        lastName: ''
-    };
-}
+function expectError(data: RawRegistrationData, error: Error) {
+    const errors: List<Error> = ValidRegistrationData.validate(data);
 
-function withInvalidEmail(): RegistrationData {
-    return {
-        ...validRawData(),
-        email: ''
-    };
+    expect(errors).toHaveLength(1);
+    expect(typeof errors[0]).toBe(typeof error);
+    expect(() => ValidRegistrationData.make(data)).toThrowError(error);
 }
-
-function withInvalidPassword(): RegistrationData {
-    return {
-        ...validRawData(),
-        password: ''
-    };
-}
-

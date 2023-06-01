@@ -1,9 +1,9 @@
-import { Role } from "./Role";
+import { Role } from "./Role"
 
-export interface RegistrationData {
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly email: string;
-    readonly password: string;
-    readonly role: Role;
+export type RawRegistrationData = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    role: Role
 }

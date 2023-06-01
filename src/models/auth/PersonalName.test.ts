@@ -14,7 +14,8 @@ describe('PersonalName tests', () => {
 })
 
 function assertIsNotValidName(name: string): void {
-    expect(() => PersonalName.create(name)).toThrowError(PersonalNameError);
+    expect(() => PersonalName.create(name))
+        .toThrowError(PersonalNameError);
 }
 
 function assertIsValidName(aName: string): void {
